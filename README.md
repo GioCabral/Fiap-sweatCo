@@ -1,10 +1,15 @@
 # Fiap sweatco app react native
 
-Criado em React Native
-preferencial: Rodar em iOS iphone se.
-Não esquecer de rodar npm i no projeto após a instalação para baixar as dependencias.
-Todas as requisições para a api estão apontadas para a porta do projeto backend ou seja 2540.
-Baixar projeto com: git clone git@github.com:GioCabral/Fiap-sweatCo.git
+Criado em React Native  
+
+preferencial: Rodar em iOS iphone se.  
+
+Não esquecer de rodar npm i no projeto após a instalação para baixar as dependencias.  
+
+Todas as requisições para a api estão apontadas para a porta do projeto backend ou seja 2540.  
+
+Baixar projeto com: git clone git@github.com:GioCabral/Fiap-sweatCo.git  
+
 
 ---
 
