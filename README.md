@@ -1,7 +1,10 @@
 # Fiap sweatco app react native
 
-Criado em React Native.
-Rodar em iOS.
+Criado em React Native
+preferencial: Rodar em iOS iphone se.
+Não esquecer de rodar npm i no projeto após a instalação para baixar as dependencias.
+Todas as requisições para a api estão apontadas para a porta do projeto backend ou seja 2540.
+Baixar projeto com: git clone git@github.com:GioCabral/Fiap-sweatCo.git
 
 ---
 
@@ -27,7 +30,9 @@ yarn start
 
 # Deixe o Bundler do Metro em sua própria janela de terminal.
 # Abra um novo terminal a partir da raiz do seu projeto React Native.
-# Execute o seguinte comando para iniciar o seu aplicativo Android ou iOS:
+# Execute o seguinte comando para iniciar o seu aplicativo iOS:
+
+#OBS: ao abrir o Metro ele poderá pedir para dar entrada no terminal com "i" para abrir o app ios retirando assim a necessidade dos passos abaixo.
 
 # Para iOS
 
@@ -37,5 +42,5 @@ npm run ios
 # OU usando Yarn
 yarn ios
 
-# Se tudo estiver configurado corretamente, você deverá ver o seu novo aplicativo rodando em seu Emulador Android ou Simulador iOS em breve, desde que tenha configurado seu emulador/simulador corretamente.
+# Se tudo estiver configurado corretamente, você deverá ver o seu novo aplicativo rodando em Simulador iOS em breve, desde que tenha configurado seu emulador/simulador corretamente.
 # Esta é uma maneira de executar o seu aplicativo — você também pode executá-lo diretamente dentro do Android Studio e do Xcode, respectivamente.
