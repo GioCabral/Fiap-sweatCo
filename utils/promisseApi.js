@@ -7,7 +7,7 @@ export const headers = AsyncStorage.getItem('userToken')
   ? {usertoken: AsyncStorage.getItem('userToken')}
   : {};
 
-export const baseURL = 'http://localhost:2540/api/';
+export const baseURL = 'http://127.0.0.1:2540/api/';
 
 export const api = axios.create({
   baseURL: baseURL,

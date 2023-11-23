@@ -34,9 +34,13 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {isLogged && <Stack.Screen name="Home" component={SportsScreen} />}
-        <Stack.Screen name="Login" component={Login} />
+      <Stack.Navigator initialRouteName={isLogged ? 'Home' : 'Login'}>
+        <Stack.Screen name="Home" component={SportsScreen} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          initialParams={{handleIsLogged: handleIsLogged}}
+        />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="SportDetails" component={SportDetailsScreen} />
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
