@@ -20,7 +20,7 @@ Para iniciar o Metro, execute o seguinte comando a partir da _raiz_ do seu proje
 npm start
 
 # OU usando Yarn
-yarn start
+yarn start ```bash
 
 # Passo 2: Inicie o seu Aplicativo
 
