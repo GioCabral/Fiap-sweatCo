@@ -4,14 +4,20 @@ import {loginStyle} from '../../styles/loginStyle';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {promisseApi} from '../../utils/promisseApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Snackbar} from 'react-native-paper';
 
 export function Register({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [name, setName] = useState('');
+  const [visible, setVisible] = useState({status: false, message: ''});
 
   const handleRegister = () => {
+    if (password !== passwordConfirm) {
+      setVisible({status: true, message: 'Senhas não conferem'});
+      return;
+    }
     promisseApi(
       'post',
       'users/',
@@ -20,7 +26,7 @@ export function Register({navigation}) {
         navigation.navigate('Home');
       },
       error => {
-        console.error(error);
+        setVisible({status: true, message: error});
       },
       {
         email: email,
@@ -37,6 +43,8 @@ export function Register({navigation}) {
     });
   }, [navigation]);
 
+  const onDismissSnackBar = () => setVisible({status: false, message: ''});
+
   return (
     <View style={loginStyle.container}>
       <Text style={loginStyle.logo}>
@@ -50,6 +58,7 @@ export function Register({navigation}) {
           placeholderTextColor="#003f5c"
           onChangeText={text => setEmail(text)}
           value={email}
+          autoCapitalize="none"
         />
       </View>
       <View style={loginStyle.inputView}>
@@ -108,6 +117,19 @@ export function Register({navigation}) {
           </View>
         </View>
       </TouchableOpacity>
+      <Snackbar
+        visible={visible.status}
+        onDismiss={onDismissSnackBar}
+        style={{backgroundColor: 'red'}}
+        action={{
+          label: 'Undo',
+          onPress: () => {
+            // Do something when 'Undo' is pressed
+            onDismissSnackBar();
+          },
+        }}>
+        {visible.message}
+      </Snackbar>
     </View>
   );
 }

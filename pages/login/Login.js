@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {loginStyle} from '../../styles/loginStyle';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {promisseApi} from '../../utils/promisseApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Snackbar} from 'react-native-paper';
 
 export function Login({navigation}) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [visible, setVisible] = useState({status: false, message: ''});
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -21,11 +23,13 @@ export function Login({navigation}) {
       'post',
       'users/login',
       data => {
+        setEmail('');
+        setPassword('');
         AsyncStorage.setItem('userToken', data.userToken);
         navigation.navigate('Home');
       },
       error => {
-        console.log(error);
+        setVisible({status: true, message: error.message}); // Ajuste para acessar a propriedade 'message' do objeto 'error'
       },
       {email, password},
     );
@@ -34,6 +38,8 @@ export function Login({navigation}) {
   const handleRegister = () => {
     navigation.navigate('Register');
   };
+
+  const onDismissSnackBar = () => setVisible({status: false, message: ''});
 
   return (
     <View style={loginStyle.container}>
@@ -48,6 +54,7 @@ export function Login({navigation}) {
           placeholderTextColor="#003f5c"
           onChangeText={text => setEmail(text)}
           value={email}
+          autoCapitalize="none"
         />
       </View>
       <View style={loginStyle.inputView}>
@@ -84,6 +91,19 @@ export function Login({navigation}) {
           </View>
         </View>
       </TouchableOpacity>
+      <Snackbar
+        visible={visible.status}
+        onDismiss={onDismissSnackBar}
+        style={{backgroundColor: 'red'}}
+        action={{
+          label: 'Undo',
+          onPress: () => {
+            // Do something when 'Undo' is pressed
+            onDismissSnackBar();
+          },
+        }}>
+        {visible.message}
+      </Snackbar>
     </View>
   );
 }

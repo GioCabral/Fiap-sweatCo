@@ -1,6 +1,7 @@
 import axios from 'axios';
 // Importar o AsyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {handleError} from './handleError';
 
 export const headers = AsyncStorage.getItem('userToken')
   ? {usertoken: AsyncStorage.getItem('userToken')}
@@ -25,8 +26,9 @@ export const promisseApi = async (
     method: method,
     url: `${baseURL}${path}`,
     ...config,
-    data: body,
   };
+
+  if (body) configAxios.data = body;
 
   let token = await AsyncStorage.getItem('userToken');
 
@@ -39,9 +41,12 @@ export const promisseApi = async (
       callbackData(data.data);
     })
     .catch(err => {
+      console.log(JSON.stringify(err));
       if (err && err.response && err.response.status === 401) {
         AsyncStorage.removeItem('userToken');
         callbackError(401);
+      } else {
+        callbackError(handleError(err));
       }
     });
 };

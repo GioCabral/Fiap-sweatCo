@@ -21,6 +21,12 @@ const BottomNavigationHub = ({navigation}) => {
           <Text style={styles.buttonText}>Dashboard</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          style={[styles.button, styles.buttonRight]}
+          onPress={() => handlePress('Ranking')}>
+          <Text style={styles.buttonText}>Ranking</Text>
+        </TouchableOpacity>
+
         {/* Add more buttons as needed */}
       </View>
     </View>

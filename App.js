@@ -7,6 +7,7 @@ import {promisseApi} from './utils/promisseApi';
 import {SportsScreen} from './pages/sports/SportsScreen';
 import SportDetailsScreen from './pages/sports/SportDetailsScreen';
 import DashboardScreen from './pages/dashboard/Dashboard';
+import RankingScreen from './pages/ranking/RankingScreen';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ function App() {
       'post',
       'users/session',
       data => {
+        console.log(data);
         setIsLogged(true);
       },
       error => {
@@ -38,6 +40,7 @@ function App() {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="SportDetails" component={SportDetailsScreen} />
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen name="Ranking" component={RankingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

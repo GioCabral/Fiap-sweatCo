@@ -3,16 +3,15 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {promisseApi} from '../../utils/promisseApi';
 import BottomNavigationHub from '../../components/BottomNavigationHub';
 
-const DashboardScreen = ({navigation}) => {
-  const [activities, setActivities] = React.useState([]);
+const RankingScreen = ({navigation}) => {
+  const [ranking, setRanking] = React.useState([]);
 
   useEffect(() => {
     promisseApi(
       'post',
-      'activities/activity',
+      'ranking',
       data => {
-        console.log(data);
-        setActivities(data);
+        setRanking(data);
       },
       error => {
         console.log(error);
@@ -20,6 +19,7 @@ const DashboardScreen = ({navigation}) => {
           navigation.navigate('Login');
         }
       },
+      undefined,
     );
   }, []);
 
@@ -32,12 +32,12 @@ const DashboardScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Ranking</Text>
       <ScrollView style={styles.list}>
-        <Text style={styles.title}>Activities Dashboard</Text>
-        {activities.map(activity => (
-          <View key={activity._id} style={styles.activityCard}>
-            <Text style={styles.activityName}>{activity.name}</Text>
-            <Text>{activity.description}</Text>
+        {ranking.map(place => (
+          <View key={place._id} style={styles.activityCard}>
+            <Text style={styles.activityName}>{place.user}</Text>
+            <Text>{place.time} minutos praticados.</Text>
           </View>
         ))}
       </ScrollView>
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DashboardScreen;
+export default RankingScreen;
